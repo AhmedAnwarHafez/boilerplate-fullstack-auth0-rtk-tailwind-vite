@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
-    "dev": "run-p dev:server dev:client tailwind",
+    "dev": "run-p dev:server dev:client",
     "dev:server": "nodemon --watch server server/index.js",
     "dev:client": "vite",
     "knex": "knex --knexfile server/db/knexfile.js",
@@ -14,7 +14,6 @@
     "db:seed": "npm run knex seed:run",
     "vite:start": "vite",
     "vite:build": "vite build",
-    "tailwind": "npx tailwindcss -i ./server/public/input.css -o ./server/public/output.css --watch",
     "postinstall": "run-s db:migrate db:seed",
     "test": "jest --verbose --watchAll",
     "lint": "eslint --ext .js,.jsx ."
@@ -47,6 +46,7 @@
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.1",
     "@vitejs/plugin-react": "^2.1.0",
+    "autoprefixer": "^10.4.12",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
     "eslint": "^8.9.0",
