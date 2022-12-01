@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
+import { useSelector } from 'react-redux'
 
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import Loading from './Loading'
-import { useSelector } from 'react-redux'
 
 function Nav() {
   const loading = useSelector((state) => state.loading)
