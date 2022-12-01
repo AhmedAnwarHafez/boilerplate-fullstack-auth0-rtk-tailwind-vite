@@ -31,7 +31,7 @@ function Nav() {
     <>
       <section className="bg-slate-600 text-white flex justify-between items-center">
         <header className="flex items-center">
-          {loading && <Loading />}
+          {loading ? <Loading /> : <section className="w-[24px] h-[24px]" />}
           <h1 className="font-bold text-2xl">Fruit FTW!</h1>
         </header>
         <nav className="flex justify-end  gap-4 px-4">
