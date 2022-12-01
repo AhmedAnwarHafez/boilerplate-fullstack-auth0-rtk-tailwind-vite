@@ -4,10 +4,10 @@ const slice = createSlice({
   name: 'loading',
   initialState: true,
   reducers: {
-    setWaiting: () => true,
-    clearWaiting: () => false,
+    setLoading: () => true,
+    clearLoading: () => false,
   },
 })
 
-export const { setWaiting, clearWaiting } = slice.actions
+export const { setLoading, clearLoading } = slice.actions
 export default slice.reducer
