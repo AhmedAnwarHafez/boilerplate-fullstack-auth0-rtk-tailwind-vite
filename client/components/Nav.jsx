@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
 
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
+import Loading from './Loading'
+import { useSelector } from 'react-redux'
 
 function Nav() {
+  const loading = useSelector((state) => state.loading)
   const { logout, loginWithRedirect, user, isLoading } = useAuth0()
 
   function handleLogoff(e) {
@@ -27,7 +30,10 @@ function Nav() {
   return (
     <>
       <section className="bg-slate-600 text-white flex justify-between items-center">
-        <h1 className="mx-4 font-bold text-2xl">Fruit FTW!</h1>
+        <header className="flex items-center">
+          {loading && <Loading />}
+          <h1 className="font-bold text-2xl">Fruit FTW!</h1>
+        </header>
         <nav className="flex justify-end  gap-4 px-4">
           <Link to="/">Home</Link>
           <IfAuthenticated>
@@ -35,7 +41,6 @@ function Nav() {
             <Link to="/" onClick={handleLogoff}>
               Log off
             </Link>
-            <p>{!isLoading && <span>{user?.email}</span>}</p>
           </IfAuthenticated>
           <IfNotAuthenticated>
             <Link to="/" onClick={handleSignIn}>
