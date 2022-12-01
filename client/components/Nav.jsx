@@ -8,7 +8,7 @@ import Loading from './Loading'
 
 function Nav() {
   const loading = useSelector((state) => state.loading)
-  const { logout, loginWithRedirect, user, isLoading } = useAuth0()
+  const { logout, loginWithRedirect } = useAuth0()
 
   function handleLogoff(e) {
     e.preventDefault()
