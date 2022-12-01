@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 
 import SelectedFruit from './SelectedFruit'
 import AddFruit from './AddFruit'
-
-import { getFruits } from '../api'
-import { useDispatch } from 'react-redux'
+import { getFruits } from '../apis/fruits'
 import { clearLoading, setLoading } from '../slices/loading'
 
 function Fruits() {

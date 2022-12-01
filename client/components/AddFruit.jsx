@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { addFruit } from '../api'
+import { addFruit } from '../apis/fruits'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useDispatch } from 'react-redux'
 import { clearLoading, setLoading } from '../slices/loading'

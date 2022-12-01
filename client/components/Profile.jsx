@@ -2,7 +2,8 @@ import { useAuth0 } from '@auth0/auth0-react'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { getUser, updateUser } from '../api'
+
+import { getUser, updateUser } from '../apis/users'
 import { setLoading, clearLoading } from '../slices/loading'
 import Button from './Button'
 

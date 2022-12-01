@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-
-import { updateFruit, deleteFruit } from '../api'
 import { useAuth0 } from '@auth0/auth0-react'
+
+import { updateFruit, deleteFruit } from '../apis/fruits'
 import { clearLoading } from '../slices/loading'
 
 function SelectedFruit({ selected, clearSelected, setError, setFruits }) {
