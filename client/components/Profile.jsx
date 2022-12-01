@@ -10,7 +10,7 @@ function Profile() {
     getAccessTokenSilently()
       .then(getUser)
       .then((userDetails) => {
-        setForm(() => ({ color: userDetails.user_metadata.color }))
+        setForm(() => ({ color: userDetails?.user_metadata?.color }))
       })
   }, [])
 
