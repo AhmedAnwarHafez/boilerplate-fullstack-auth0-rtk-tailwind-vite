@@ -14,7 +14,9 @@ function Profile() {
     getAccessTokenSilently()
       .then(getUser)
       .then((userDetails) => {
-        setForm(() => ({ color: userDetails?.user_metadata?.color }))
+        setForm(() => ({
+          color: userDetails ? userDetails?.user_metadata?.color : '',
+        }))
         dispatch(clearLoading())
       })
   }, [])
@@ -25,6 +27,7 @@ function Profile() {
 
   function handleSubmit(e) {
     e.preventDefault()
+
     dispatch(setLoading())
     getAccessTokenSilently()
       .then((token) => {
