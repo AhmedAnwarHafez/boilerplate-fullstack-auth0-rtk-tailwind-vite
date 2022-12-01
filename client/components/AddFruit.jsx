@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 
 import { addFruit } from '../api'
 import { useAuth0 } from '@auth0/auth0-react'
+import { useDispatch } from 'react-redux'
+import { clearLoading, setLoading } from '../slices/loading'
 
 function AddFruit({ setFruits, closeAddForm, setError }) {
+  const dispatch = useDispatch()
   const { getAccessTokenSilently } = useAuth0()
   const [newFruit, setNewFruit] = useState(false)
 
@@ -18,11 +21,15 @@ function AddFruit({ setFruits, closeAddForm, setError }) {
   const handleAdd = async (e) => {
     e.preventDefault()
     const fruit = { ...newFruit }
+    dispatch(setLoading())
     getAccessTokenSilently()
       .then((token) => addFruit(fruit, token))
       .then(setFruits)
       .then(closeAddForm)
       .catch((err) => setError(err.message))
+      .finally(() => {
+        dispatch(clearLoading())
+      })
   }
 
   const { name: addingName, averageGramsEach: addingGrams } = newFruit

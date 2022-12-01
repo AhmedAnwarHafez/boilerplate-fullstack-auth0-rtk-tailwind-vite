@@ -4,8 +4,11 @@ import SelectedFruit from './SelectedFruit'
 import AddFruit from './AddFruit'
 
 import { getFruits } from '../api'
+import { useDispatch } from 'react-redux'
+import { clearLoading, setLoading } from '../slices/loading'
 
 function Fruits() {
+  const dispatch = useDispatch()
   const [error, setError] = useState('')
   const [fruits, setFruits] = useState([])
   const [adding, setAdding] = useState(false)
@@ -34,9 +37,15 @@ function Fruits() {
   }
 
   useEffect(() => {
+    dispatch(setLoading())
     getFruits()
-      .then((remoteFruits) => setFruits(remoteFruits))
+      .then((remoteFruits) => {
+        setFruits(remoteFruits)
+      })
       .catch((err) => setError(err.message))
+      .finally(() => {
+        dispatch(clearLoading())
+      })
   }, [])
 
   return (

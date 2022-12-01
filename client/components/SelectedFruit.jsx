@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import { updateFruit, deleteFruit } from '../api'
 import { useAuth0 } from '@auth0/auth0-react'
+import { clearLoading } from '../slices/loading'
 
 function SelectedFruit({ selected, clearSelected, setError, setFruits }) {
   const { getAccessTokenSilently } = useAuth0()
@@ -34,6 +35,9 @@ function SelectedFruit({ selected, clearSelected, setError, setFruits }) {
       .then(clearSelected)
       .then(() => setError(''))
       .catch((err) => setError(err.message))
+      .finally(() => {
+        dispatch(clearLoading())
+      })
   }
 
   useEffect(() => {
