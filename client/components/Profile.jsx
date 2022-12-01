@@ -1,16 +1,21 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { getUser, updateUser } from '../api'
+import { clearWaiting, setWaiting } from '../slices/loading'
 
 function Profile() {
+  const dispatch = useDispatch()
   const { getAccessTokenSilently, user } = useAuth0()
   const [form, setForm] = useState({ color: '' })
 
   useEffect(() => {
+    dispatch(setWaiting())
     getAccessTokenSilently()
       .then(getUser)
       .then((userDetails) => {
         setForm(() => ({ color: userDetails?.user_metadata?.color }))
+        dispatch(clearWaiting())
       })
   }, [])
 
@@ -18,10 +23,16 @@ function Profile() {
     setForm(() => ({ ...form, [e.target.name]: e.target.value }))
   }
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault()
-    const token = await getAccessTokenSilently()
-    await updateUser(form, token)
+    dispatch(setWaiting())
+    getAccessTokenSilently()
+      .then((token) => {
+        return updateUser(form, token)
+      })
+      .then(() => {
+        dispatch(clearWaiting())
+      })
   }
 
   return (
