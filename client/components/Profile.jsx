@@ -1,11 +1,15 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { getUser, updateUser } from '../api'
 import { setLoading, clearLoading } from '../slices/loading'
+import Button from './Button'
 
 function Profile() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const isLoading = useSelector((state) => state.loading)
   const { getAccessTokenSilently, user } = useAuth0()
   const [form, setForm] = useState({ color: '' })
 
@@ -35,6 +39,7 @@ function Profile() {
       })
       .then(() => {
         dispatch(clearLoading())
+        navigate('/')
       })
   }
 
@@ -63,12 +68,13 @@ function Profile() {
       focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
           />
         </label>
-        <button
+        <Button
           onClick={handleSubmit}
-          className="rounded-2xl bg-blue-800 hover:bg-blue-600 text-white p-2 px-4 w-fit"
+          isLoading={isLoading}
+          className="flex justify-evenly rounded-2xl bg-blue-800 hover:bg-blue-600 text-white p-2 px-4 w-fit"
         >
           Update
-        </button>
+        </Button>
       </form>
     </>
   )
