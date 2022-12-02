@@ -1,10 +1,27 @@
 {
-  "compilerOptions": {
-    "module": "CommonJS",
-    "moduleResolution": "Node",
-    "target": "ES6",
-    "sourceMap": true,
-    "outDir": "dist",
+  "ts-node": {
+    "transpileOnly": true
   },
-  "exclude": ["node_modules"]
+  "compilerOptions": {
+    /* Visit https://aka.ms/tsconfig to read more about this file */
+    /* Projects */
+    /* Language and Environment */
+    "target": "es2016" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
+    "types": ["node", "jest"],
+    "jsx": "react-jsx" /* Specify what JSX code is generated. */,
+    /* Modules */
+    "module": "ESNext" /* Specify what module code is generated. */,
+    "moduleResolution": "node",
+    /* Interop Constraints */
+    "esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */,
+    "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
+
+    /* Type Checking */
+    "strict": true /* Enable all strict
+    "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */,
+    "noEmit": true,
+    "allowJs": true
+  }, "include": [
+    "client/**/*", "server/**/*", "authenticare.d.ts"
+  ]
 }
