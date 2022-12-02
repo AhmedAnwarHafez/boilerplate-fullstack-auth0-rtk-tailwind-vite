@@ -10,6 +10,13 @@ export function getFruits() {
     .catch(logError)
 }
 
+export function getFruit(id) {
+  return request
+    .get(`${rootUrl}/fruits/${id}`)
+    .then((res) => res.body)
+    .catch(logError)
+}
+
 export function addFruit(fruit, token) {
   return request
     .post(`${rootUrl}/fruits`)

@@ -2,6 +2,7 @@ const connection = require('./connection')
 
 module.exports = {
   getFruits,
+  getFruit,
   addFruit,
   updateFruit,
   deleteFruit,
@@ -13,18 +14,20 @@ function sort(fruitArray) {
   return allFruits
 }
 
-async function getFruits(db = connection) {
-  return db('fruits')
-    .select(
-      'id',
-      'name',
-      'average_grams_each as averageGramsEach',
-      'added_by_user as addedByUser'
-    )
-    .then(sort)
+function getFruits(db = connection) {
+  return db('fruits').select(
+    'id',
+    'name',
+    'average_grams_each as averageGramsEach',
+    'auth0_id'
+  )
 }
 
-async function addFruit(fruit, db = connection) {
+function getFruit(id, db = connection) {
+  return getFruits(db).where('id', id).first()
+}
+
+function addFruit(fruit, db = connection) {
   return db('fruits')
     .insert(fruit)
     .then(() => db)
@@ -32,7 +35,7 @@ async function addFruit(fruit, db = connection) {
     .then(sort)
 }
 
-async function updateFruit(newFruit, user, db = connection) {
+function updateFruit(newFruit, user, db = connection) {
   return db('fruits')
     .where('id', newFruit.id)
     .first()
@@ -45,7 +48,7 @@ async function updateFruit(newFruit, user, db = connection) {
     .then(sort)
 }
 
-async function deleteFruit(id, auth0Id, db = connection) {
+function deleteFruit(id, auth0Id, db = connection) {
   return db('fruits')
     .where('id', id)
     .first()

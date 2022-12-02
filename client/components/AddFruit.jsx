@@ -4,11 +4,14 @@ import { addFruit } from '../apis/fruits'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useDispatch } from 'react-redux'
 import { clearLoading, setLoading } from '../slices/loading'
+import { useNavigate } from 'react-router-dom'
 
-function AddFruit({ setFruits, closeAddForm, setError }) {
+function AddFruit() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { getAccessTokenSilently } = useAuth0()
   const [newFruit, setNewFruit] = useState(false)
+  const { name: addingName, averageGramsEach: addingGrams } = newFruit
 
   const handleAddChange = (e) => {
     const { name, value } = e.target
@@ -24,15 +27,18 @@ function AddFruit({ setFruits, closeAddForm, setError }) {
     dispatch(setLoading())
     getAccessTokenSilently()
       .then((token) => addFruit(fruit, token))
-      .then(setFruits)
-      .then(closeAddForm)
-      .catch((err) => setError(err.message))
+      .then(() => navigate('/'))
+      .catch((err) => {
+        console.error(err)
+      })
       .finally(() => {
         dispatch(clearLoading())
       })
   }
 
-  const { name: addingName, averageGramsEach: addingGrams } = newFruit
+  const handleCancel = () => {
+    navigate('/')
+  }
 
   return (
     <>
@@ -77,14 +83,14 @@ function AddFruit({ setFruits, closeAddForm, setError }) {
             type="submit"
             className="rounded-2xl bg-blue-800 hover:bg-blue-600 text-white p-2 px-4 w-fit"
           >
-            Add fruit
+            Add
           </button>
           <button
             type="button"
-            onClick={closeAddForm}
+            onClick={handleCancel}
             className="rounded-2xl bg-blue-800 hover:bg-blue-600 text-white p-2 px-4 w-fit"
           >
-            Close
+            Cancel
           </button>
         </form>
       </main>

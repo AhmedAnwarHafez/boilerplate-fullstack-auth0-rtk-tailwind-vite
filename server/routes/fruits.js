@@ -18,6 +18,17 @@ router.get('/', async (req, res) => {
   }
 })
 
+// GET /api/v1/fruits/1
+router.get('/:id', async (req, res) => {
+  try {
+    const fruit = await db.getFruit(req.params.id)
+    res.json(fruit)
+  } catch (err) {
+    console.error(err)
+    res.status(500).send(err.message)
+  }
+})
+
 // use checkJwt as middleware
 // POST /api/v1/fruits
 router.post('/', checkJwt, async (req, res) => {

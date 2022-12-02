@@ -1,19 +1,37 @@
 import React, { useState, useEffect } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
 
-import { updateFruit, deleteFruit } from '../apis/fruits'
-import { clearLoading } from '../slices/loading'
+import { updateFruit, deleteFruit, getFruit } from '../apis/fruits'
+import { clearLoading, setLoading } from '../slices/loading'
+import { useParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 
-function SelectedFruit({ selected, clearSelected, setError, setFruits }) {
+function SelectedFruit() {
+  const { id } = useParams()
+  const dispatch = useDispatch()
   const { getAccessTokenSilently } = useAuth0()
-  const [editing, setEditing] = useState(selected)
+  const [fruit, setFruit] = useState({
+    name: '',
+    averageGramsEach: '',
+    user: '',
+  })
 
-  const handleEditChange = (e) => {
-    const { name, value } = e.target
-    setEditing({
-      ...editing,
-      [name]: value,
-    })
+  useEffect(() => {
+    dispatch(setLoading())
+    getFruit(id)
+      .then((fruit) => {
+        console.log(fruit)
+        setFruit(() => fruit)
+      })
+      .catch((err) => {})
+      .finally(() => {
+        dispatch(clearLoading())
+      })
+  }, [id])
+
+  const handleChange = (e) => {
+    setFruit((state) => ({ ...state, [e.target.name]: e.target.value }))
   }
 
   const handleUpdate = (e) => {
@@ -40,18 +58,10 @@ function SelectedFruit({ selected, clearSelected, setError, setFruits }) {
       })
   }
 
-  useEffect(() => {
-    setEditing(selected)
-  }, [selected])
-
-  const { name: editingName, averageGramsEach: editingGrams } = editing
-  const { name: currentName, username: user } = selected
-
   return (
     <>
       <main className="shadow-lg rounded-lg p-4">
-        <h2 className="text-2xl my-4">Selected: {currentName}</h2>
-        <p>Originally added by {user}</p>
+        <p>Originally added by {fruit?.user}</p>
         <form
           onSubmit={handleUpdate}
           className="flex flex-col justify-start gap-1"
@@ -63,8 +73,8 @@ function SelectedFruit({ selected, clearSelected, setError, setFruits }) {
               name="name"
               aria-label="selected-name"
               data-testid="selected-name"
-              value={editingName || ''}
-              onChange={handleEditChange}
+              value={fruit.name}
+              onChange={handleChange}
               className="mx-4 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
       focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
       disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
@@ -79,8 +89,8 @@ function SelectedFruit({ selected, clearSelected, setError, setFruits }) {
               name="averageGramsEach"
               aria-label="selected-grams"
               data-testid="selected-grams"
-              value={editingGrams || ''}
-              onChange={handleEditChange}
+              value={fruit.averageGramsEach}
+              onChange={handleChange}
               className="mx-4 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
       focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
       disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
@@ -100,19 +110,17 @@ function SelectedFruit({ selected, clearSelected, setError, setFruits }) {
             <button
               type="button"
               data-testid="delete-button"
-              onClick={handleDelete}
+              // onClick={handleDelete}
               className="rounded-2xl bg-blue-800 hover:bg-blue-600 text-white p-2 px-4 w-fit"
             >
               Delete
             </button>
-            <button
-              type="button"
-              data-testid="clear-button"
-              onClick={clearSelected}
+            <Link
+              to="/"
               className="rounded-2xl bg-blue-800 hover:bg-blue-600 text-white p-2 px-4 w-fit"
             >
-              Clear selection
-            </button>
+              Cancel
+            </Link>
           </section>
         </form>
       </main>

@@ -1,38 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-import SelectedFruit from './SelectedFruit'
-import AddFruit from './AddFruit'
 import { getFruits } from '../apis/fruits'
 import { clearLoading, setLoading } from '../slices/loading'
+import { Outlet } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 function Fruits() {
   const dispatch = useDispatch()
   const [error, setError] = useState('')
   const [fruits, setFruits] = useState([])
-  const [adding, setAdding] = useState(false)
-  const [selected, setSelected] = useState(null)
 
   function hideError() {
     setError('')
   }
 
-  function openAddForm(e) {
-    e.preventDefault()
-    setAdding(true)
-  }
-
-  function closeAddForm() {
-    setAdding(false)
-  }
-
   function setSelectHandler(fruit, e) {
     e.preventDefault()
-    setSelected(fruit)
-  }
-
-  function clearSelected() {
-    setSelected(null)
   }
 
   useEffect(() => {
@@ -48,47 +32,37 @@ function Fruits() {
   }, [])
 
   return (
-    <section className="flex flex-col gap-4 items-center justify-center h-screen">
-      <div onClick={hideError}>{error && `Error: ${error}`}</div>
+    <section className="grid grid-cols-2">
+      <section className="flex flex-col ml-5 mt-5 border-r-2 border-r-slate-200 pr-10">
+        <div onClick={hideError}>{error && `Error: ${error}`}</div>
+        <Link to="/new">
+          <div class="w-7 h-7 rounded-full flex justify-center items-center bg-orange-500 text-white">
+            <p>+</p>
+          </div>
+        </Link>
+        <ul className="">
+          {fruits.map((fruit) => (
+            <li key={fruit.id}>
+              <Link
+                to={`/${fruit.id}`}
+                className="text-purple-700 hover:text-purple-500"
+              >
+                {fruit.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
 
-      <ul className="p-4 shadow-2xl rounded-xl">
-        {fruits.map((fruit) => (
-          <li key={fruit.id}>
-            <button
-              href="#"
-              onClick={(e) => setSelectHandler(fruit, e)}
-              className="text-purple-700 hover:text-purple-500"
-            >
-              {fruit.name}
-            </button>
-          </li>
-        ))}
-      </ul>
-
-      {adding ? (
-        <AddFruit
-          setError={setError}
-          setFruits={setFruits}
-          closeAddForm={closeAddForm}
-        />
-      ) : (
-        <button
-          href="#"
-          onClick={openAddForm}
-          className="rounded-2xl bg-blue-800 hover:bg-blue-600 text-white p-2 px-4"
-        >
-          Add a Fruit
-        </button>
-      )}
-
-      {selected && (
+        {/* {selected && (
         <SelectedFruit
           selected={selected}
           clearSelected={clearSelected}
           setError={setError}
           setFruits={setFruits}
         />
-      )}
+      )} */}
+      </section>
+      <Outlet />
     </section>
   )
 }
