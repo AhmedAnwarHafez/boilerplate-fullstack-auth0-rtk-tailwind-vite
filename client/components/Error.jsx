@@ -1,15 +1,20 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { clearError } from '../slices/error'
 
 function Error() {
+  const dispatch = useDispatch()
   const error = useSelector((state) => state.error)
-  const [visible, setVisible] = useState(!error)
+
   return (
     <section>
-      {visible && (
+      {!!error && (
         <p className="text-sm">
           {error}{' '}
-          <span className="cursor-pointer" onClick={() => setVisible(false)}>
+          <span
+            className="cursor-pointer font-mono font-bold rounded-lg bg-slate-400 px-1"
+            onClick={() => dispatch(clearError())}
+          >
             X
           </span>
         </p>
