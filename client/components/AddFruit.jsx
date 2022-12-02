@@ -5,6 +5,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { useDispatch } from 'react-redux'
 import { clearLoading, setLoading } from '../slices/loading'
 import { useNavigate } from 'react-router-dom'
+import { setError } from '../slices/error'
 
 function AddFruit() {
   const dispatch = useDispatch()
@@ -29,7 +30,7 @@ function AddFruit() {
       .then((token) => addFruit(fruit, token))
       .then(() => navigate('/'))
       .catch((err) => {
-        console.error(err)
+        dispatch(setError(err.message))
       })
       .finally(() => {
         dispatch(clearLoading())
