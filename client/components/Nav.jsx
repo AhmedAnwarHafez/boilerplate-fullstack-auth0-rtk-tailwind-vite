@@ -29,24 +29,32 @@ function Nav() {
 
   return (
     <>
-      <section className="bg-slate-600 text-white flex justify-between items-center">
+      <section className="bg-blue-900 text-white flex justify-between items-center">
         <header className="flex items-center">
           {loading ? <Loading /> : <section className="w-[24px] h-[24px]" />}
           <h1 className="font-bold text-2xl">Fruit FTW!</h1>
         </header>
         <nav className="flex justify-end  gap-4 px-4">
-          <Link to="/">Home</Link>
+          <Link to="/" className="hover:font-semibold">
+            Home
+          </Link>
           <IfAuthenticated>
-            <Link to="/profile">Profile</Link>
-            <Link to="/" onClick={handleLogoff}>
+            <Link to="/profile" className="hover:font-semibold">
+              Profile
+            </Link>
+            <Link to="/" onClick={handleLogoff} className="hover:font-semibold">
               Log off
             </Link>
           </IfAuthenticated>
           <IfNotAuthenticated>
-            <Link to="/" onClick={handleSignIn}>
+            <Link to="/" onClick={handleSignIn} className="hover:font-semibold">
               Sign In
             </Link>
-            <Link to="/" onClick={handleRegister}>
+            <Link
+              to="/"
+              onClick={handleRegister}
+              className="hover:font-semibold"
+            >
               Register
             </Link>
           </IfNotAuthenticated>

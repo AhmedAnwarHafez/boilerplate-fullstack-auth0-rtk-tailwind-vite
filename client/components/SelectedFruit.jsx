@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
+import { useParams, Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 import { updateFruit, deleteFruit, getFruit } from '../apis/fruits'
 import { clearLoading, setLoading } from '../slices/loading'
-import { useParams } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { setError } from '../slices/error'
 
 function SelectedFruit() {
   const { id } = useParams()
@@ -14,7 +14,7 @@ function SelectedFruit() {
   const [fruit, setFruit] = useState({
     name: '',
     averageGramsEach: '',
-    user: '',
+    auth0Id: '',
   })
 
   useEffect(() => {
@@ -37,21 +37,16 @@ function SelectedFruit() {
   const handleUpdate = (e) => {
     e.preventDefault()
     getAccessTokenSilently()
-      .then((token) => updateFruit(editing, token))
-      .then((remoteFruits) => setFruits(remoteFruits))
-      .then(clearSelected)
-      .then(() => setError(''))
-      .catch((err) => setError(err.message))
+      // .then((token) => updateFruit(fruit, token))
+      .catch((err) => dispatch(setError(err.message)))
+      .finally(() => dispatch(clearLoading()))
   }
 
   const handleDelete = (e) => {
     e.preventDefault()
     getAccessTokenSilently()
       .then((token) => deleteFruit(editing.id, token))
-
       .then(setFruits)
-      .then(clearSelected)
-      .then(() => setError(''))
       .catch((err) => setError(err.message))
       .finally(() => {
         dispatch(clearLoading())
@@ -60,12 +55,16 @@ function SelectedFruit() {
 
   return (
     <>
-      <main className="shadow-lg rounded-lg p-4">
-        <p>Originally added by {fruit?.user}</p>
+      <main className="mt-5">
+        <p></p>
         <form
           onSubmit={handleUpdate}
           className="flex flex-col justify-start gap-1"
         >
+          <label className="grid grid-cols-2 gap-2">
+            Originally added by
+            <p className="mx-4">{fruit?.auth0Id}</p>
+          </label>
           <label className="grid grid-cols-2 gap-2">
             Name:
             <input

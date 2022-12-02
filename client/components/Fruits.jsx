@@ -32,12 +32,12 @@ function Fruits() {
   }, [])
 
   return (
-    <section className="grid grid-cols-2">
+    <section className="flex gap-4">
       <section className="flex flex-col ml-5 mt-5 border-r-2 border-r-slate-200 pr-10">
         <div onClick={hideError}>{error && `Error: ${error}`}</div>
-        <Link to="/new">
-          <div className="w-7 h-7 rounded-full flex justify-center items-center bg-blue-800 text-white">
-            <p>+</p>
+        <Link to="/new" className="justify-self-end">
+          <div className="rounded-lg p-1 bg-blue-800 text-white hover:bg-blue-500">
+            <p>+ New</p>
           </div>
         </Link>
         <ul className="">
@@ -45,7 +45,7 @@ function Fruits() {
             <li key={fruit.id}>
               <Link
                 to={`/${fruit.id}`}
-                className="text-purple-700 hover:text-purple-500"
+                className="text-blue-700 hover:text-blue-500"
               >
                 {fruit.name}
               </Link>

@@ -43,7 +43,7 @@ function AddFruit() {
 
   return (
     <>
-      <main className="shadow-lg rounded-lg p-4">
+      <main className="">
         <h2 className="text-2xl my-4 uppercase">Add new fruit</h2>
         <form
           onSubmit={handleAdd}
