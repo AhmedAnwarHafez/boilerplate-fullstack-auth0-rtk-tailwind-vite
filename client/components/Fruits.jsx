@@ -36,7 +36,7 @@ function Fruits() {
       <section className="flex flex-col ml-5 mt-5 border-r-2 border-r-slate-200 pr-10">
         <div onClick={hideError}>{error && `Error: ${error}`}</div>
         <Link to="/new">
-          <div class="w-7 h-7 rounded-full flex justify-center items-center bg-orange-500 text-white">
+          <div className="w-7 h-7 rounded-full flex justify-center items-center bg-blue-800 text-white">
             <p>+</p>
           </div>
         </Link>
