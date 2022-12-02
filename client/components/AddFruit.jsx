@@ -10,7 +10,7 @@ import { setError } from '../slices/error'
 function AddFruit() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { getAccessTokenSilently } = useAuth0()
+  const { getAccessTokenSilently, isAuthenticated } = useAuth0()
   const [newFruit, setNewFruit] = useState(false)
   const { name: addingName, averageGramsEach: addingGrams } = newFruit
 
@@ -82,7 +82,11 @@ function AddFruit() {
           </label>
           <button
             type="submit"
-            className="rounded-2xl bg-blue-800 hover:bg-blue-600 text-white p-2 px-4 w-fit"
+            className={`rounded-2xl bg-blue-800 hover:bg-blue-600 text-white p-2 px-4 w-fit ${
+              !isAuthenticated &&
+              'bg-slate-300 text-slate-800 cursor-not-allowed hover:bg-slate-400'
+            }`}
+            disabled={!isAuthenticated}
           >
             Add
           </button>
