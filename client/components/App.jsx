@@ -6,11 +6,15 @@ import Fruits from './Fruits'
 import Profile from './Profile'
 import AddFruit from './AddFruit'
 import SelectedFruit from './SelectedFruit'
+import Error from './Error'
 
 function App() {
   return (
     <>
       <Nav />
+      <header>
+        <Error />
+      </header>
       <main className="flex  ">
         <Routes>
           <Route path="/" element={<Fruits />}>
