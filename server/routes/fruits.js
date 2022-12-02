@@ -35,7 +35,7 @@ router.post('/', checkJwt, async (req, res) => {
   const { fruit } = req.body
   const auth0Id = req.user?.sub
   const newFruit = {
-    added_by_user: auth0Id,
+    auth0_id: auth0Id,
     name: fruit.name,
     average_grams_each: fruit.averageGramsEach,
   }

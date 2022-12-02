@@ -19,7 +19,7 @@ function getFruits(db = connection) {
     'id',
     'name',
     'average_grams_each as averageGramsEach',
-    'auth0_id'
+    'auth0_id as auth0Id'
   )
 }
 
