@@ -32,7 +32,7 @@ function Fruits() {
             <p>+ New</p>
           </div>
         </Link>
-        <ul className="">
+        <ul className="flex flex-col gap-3 my-5">
           {fruits.map((fruit: Fruit) => (
             <li key={fruit.id}>
               <Link
