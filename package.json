@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "run-p dev:server dev:client tailwind",
-    "dev:server": "nodemon --watch server server/index.js",
+    "dev:server": "nodemon --watch server server/index.ts",
     "dev:client": "vite",
     "knex": "knex --knexfile server/db/knexfile.js",
     "db-reset": "run-s db:*",
