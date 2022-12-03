@@ -1,8 +1,8 @@
-const path = require('path')
-const express = require('express')
+import path from 'path'
+import express from 'express'
 
-const fruitRoutes = require('./routes/fruits')
-const userRoutes = require('./routes/users')
+import fruitRoutes from './routes/fruits'
+import userRoutes from './routes/users'
 const server = express()
 
 server.use(express.json())
@@ -15,4 +15,4 @@ server.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'index.html'))
 })
 
-module.exports = server
+export default server

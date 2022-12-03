@@ -2,7 +2,6 @@ const jwt = require('express-jwt')
 const jwks = require('jwks-rsa')
 const { ManagementClient } = require('auth0')
 const dotenv = require('dotenv')
-const request = require('superagent')
 
 dotenv.config()
 

@@ -1,5 +1,5 @@
-const express = require('express')
-const { checkJwt, updateUser, getUser } = require('../auth0')
+import express from 'express'
+import { checkJwt, updateUser, getUser } from '../auth0'
 
 const router = express.Router()
 
@@ -32,4 +32,4 @@ router.post('/', checkJwt, (req, res) => {
   res.sendStatus(201)
 })
 
-module.exports = router
+export default router
