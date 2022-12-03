@@ -24,12 +24,14 @@ router.post('/', checkJwt, (req, res) => {
   const userDetails = {
     color,
   }
-  console.log(userDetails)
-  updateUser(auth0_id, userDetails).then((metadata) => {
-    console.log(metadata)
-  })
-
-  res.sendStatus(201)
+  updateUser(auth0_id, userDetails)
+    .then(() => {
+      res.sendStatus(201)
+    })
+    .catch((err) => {
+      console.error(err)
+      res.sendStatus(500)
+    })
 })
 
 export default router

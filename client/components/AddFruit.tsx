@@ -29,6 +29,7 @@ function AddFruit() {
   const handleAdd = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     dispatch(setLoading())
+    // eslint-disable-next-line promise/catch-or-return
     getAccessTokenSilently()
       .then((token) => addFruit(fruit, token))
       .then(() => navigate('/'))

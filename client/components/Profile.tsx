@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { getUser, updateUser } from '../apis/users'
 import { RootState } from '../slices'
+import { setError } from '../slices/error'
 import { setLoading, clearLoading } from '../slices/loading'
 import Button from './Button'
 
@@ -17,14 +18,16 @@ function Profile() {
 
   useEffect(() => {
     dispatch(setLoading())
+    // eslint-disable-next-line promise/catch-or-return
     getAccessTokenSilently()
       .then(getUser)
       .then((userDetails) => {
         setForm(() => ({
           color: userDetails ? userDetails?.color : '',
         }))
-        dispatch(clearLoading())
       })
+      .catch((err) => dispatch(setError(err)))
+      .finally(() => dispatch(clearLoading()))
   }, [])
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -33,16 +36,14 @@ function Profile() {
 
   function handleSubmit() {
     dispatch(setLoading())
+    // eslint-disable-next-line promise/catch-or-return
     getAccessTokenSilently()
       .then((token) => {
-        console.log({ form })
-
-        return updateUser(form, token)
-      })
-      .then(() => {
-        dispatch(clearLoading())
+        updateUser(form, token)
         navigate('/')
       })
+      .catch((err) => dispatch(setError(err)))
+      .finally(() => dispatch(clearLoading()))
   }
 
   return (
@@ -57,7 +58,7 @@ function Profile() {
           <span className="ml-4 font-bold">{user?.email}</span>
         </label>
         <label htmlFor="color" className="grid grid-cols-2 gap-2">
-          What's your favourite color
+          What&apos;s your favourite color
           <input
             type="text"
             name="color"

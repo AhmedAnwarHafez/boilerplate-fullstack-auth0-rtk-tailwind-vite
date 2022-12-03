@@ -3,7 +3,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { useParams, Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
-import { updateFruit, deleteFruit, getFruit } from '../apis/fruits'
+import { updateFruit, getFruit } from '../apis/fruits'
 import { clearLoading, setLoading } from '../slices/loading'
 import { setError } from '../slices/error'
 import { Fruit } from '../../common/fruit'
@@ -29,7 +29,7 @@ function SelectedFruit() {
         })
         .catch((err) => dispatch(setError(err.message)))
         .finally(() => dispatch(clearLoading()))
-  }, [id])
+  }, [id, dispatch])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFruit((state) => ({ ...state, [e.target.name]: e.target.value }))
@@ -37,9 +37,9 @@ function SelectedFruit() {
 
   const handleUpdate = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    // eslint-disable-next-line promise/catch-or-return
     getAccessTokenSilently()
       .then((token) => {
-        console.log(fruit)
         updateFruit(fruit, token)
       })
       .catch((err) => dispatch(setError(err.message)))

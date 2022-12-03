@@ -1,5 +1,4 @@
-import { Request, Response } from 'express'
-import express from 'express'
+import express, { Request, Response } from 'express'
 
 import { checkJwt } from '../auth0'
 import db from '../db/fruits'
@@ -9,6 +8,7 @@ const router = express.Router()
 export default router
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Express {
     interface Request {
       user?: {
@@ -90,17 +90,17 @@ router.put('/', checkJwt, async (req, res) => {
 // DELETE /api/v1/fruits
 router.delete('/:id', checkJwt, async (req, res) => {
   const id = Number(req.params.id)
-  // const auth0Id = req.user?.sub
-  // try {
-  //   const fruits = await db.deleteFruit(id, auth0Id)
-  //   res.json({ fruits })
-  // } catch (err) {
-  //   console.error(err)
-  //   if (err.message === 'Unauthorized') {
-  //     return res
-  //       .status(403)
-  //       .send('Unauthorized: Only the user who added the fruit may delete it')
-  //   }
-  //   res.status(500).send(err.message)
-  // }
+  const auth0Id = req.user?.sub
+  try {
+    const fruits = await db.deleteFruit(id, auth0Id)
+    res.json({ fruits })
+  } catch (err) {
+    console.error(err)
+    // if (err.message === 'Unauthorized') {
+    //   return res
+    //     .status(403)
+    //     .send('Unauthorized: Only the user who added the fruit may delete it')
+    // }
+    res.sendStatus(500)
+  }
 })

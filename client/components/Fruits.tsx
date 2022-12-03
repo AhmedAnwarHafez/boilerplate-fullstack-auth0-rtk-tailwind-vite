@@ -3,8 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import { getFruits } from '../apis/fruits'
 import { clearLoading, setLoading } from '../slices/loading'
-import { Outlet } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import { Outlet, Link } from 'react-router-dom'
 import { Fruit } from '../../common/fruit'
 import { setError } from '../slices/error'
 
@@ -14,6 +13,7 @@ function Fruits() {
 
   useEffect(() => {
     dispatch(setLoading())
+    // eslint-disable-next-line promise/catch-or-return
     getFruits()
       .then((remoteFruits) => {
         setFruits(remoteFruits)
@@ -22,7 +22,7 @@ function Fruits() {
       .finally(() => {
         dispatch(clearLoading())
       })
-  }, [])
+  }, [dispatch])
 
   return (
     <section className="flex gap-2 w-screen">
