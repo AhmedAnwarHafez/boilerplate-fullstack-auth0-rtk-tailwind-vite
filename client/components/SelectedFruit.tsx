@@ -48,8 +48,7 @@ function SelectedFruit() {
 
   return (
     <>
-      <main className="mt-5">
-        <p></p>
+      <main className="mt-5 text-5xl">
         <form
           onSubmit={handleUpdate}
           className="flex flex-col justify-start gap-1"
@@ -67,7 +66,7 @@ function SelectedFruit() {
               data-testid="selected-name"
               value={fruit.name}
               onChange={handleChange}
-              className="mx-4 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
+              className="mx-4 bg-white border border-slate-300 rounded-md text-5xl shadow-sm placeholder-slate-400
       focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
       disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
       invalid:border-pink-500 invalid:text-pink-600
@@ -83,7 +82,7 @@ function SelectedFruit() {
               data-testid="selected-grams"
               value={fruit.averageGramsEach}
               onChange={handleChange}
-              className="mx-4 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
+              className="mx-4 bg-white border border-slate-300 rounded-md text-5xl shadow-sm placeholder-slate-400
       focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
       disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
       invalid:border-pink-500 invalid:text-pink-600

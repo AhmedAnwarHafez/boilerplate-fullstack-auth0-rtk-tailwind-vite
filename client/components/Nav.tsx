@@ -26,10 +26,10 @@ function Nav() {
 
   return (
     <>
-      <section className="bg-blue-900 text-white flex justify-between items-center">
+      <section className="bg-blue-900 text-white flex justify-between items-center text-5xl">
         <header className="flex items-center">
           {loading ? <Loading /> : <section className="w-[24px] h-[24px]" />}
-          <h1 className="font-bold text-2xl">Fruit FTW!</h1>
+          <h1 className="font-bold">Fruit FTW!</h1>
         </header>
         <nav className="flex justify-end  gap-4 px-4">
           <Link to="/" className="hover:font-semibold">

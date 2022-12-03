@@ -46,8 +46,8 @@ function AddFruit() {
 
   return (
     <>
-      <main className="">
-        <h2 className="text-2xl my-4 uppercase">Add new fruit</h2>
+      <main className="text-5xl">
+        <h2 className="my-4 uppercase">Add new fruit</h2>
         <form
           onSubmit={handleAdd}
           className="flex flex-col justify-start gap-1"
@@ -60,7 +60,7 @@ function AddFruit() {
               aria-label="adding-name"
               value={fruit.name}
               onChange={handleAddChange}
-              className="mx-4 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
+              className="mx-4 bg-white border border-slate-300 rounded-md text-5xl shadow-sm placeholder-slate-400
       focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
       disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
       invalid:border-pink-500 invalid:text-pink-600
@@ -76,7 +76,7 @@ function AddFruit() {
               aria-label="adding-grams"
               value={fruit.averageGramsEach}
               onChange={handleAddChange}
-              className="mx-4 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
+              className="mx-4 bg-white border border-slate-300 rounded-md text-5xl shadow-sm placeholder-slate-400
       focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
       disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
       invalid:border-pink-500 invalid:text-pink-600

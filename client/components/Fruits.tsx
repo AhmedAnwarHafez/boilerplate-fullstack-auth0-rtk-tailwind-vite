@@ -26,7 +26,7 @@ function Fruits() {
 
   return (
     <section className="flex gap-4">
-      <section className="flex flex-col ml-5 mt-5 border-r-2 border-r-slate-200 pr-10">
+      <section className="flex flex-col ml-5 mt-5 border-r-2 border-r-slate-200 pr-10 text-5xl">
         <Link to="/new" className="justify-self-end">
           <div className="rounded-lg p-1 bg-blue-800 text-white hover:bg-blue-500">
             <p>+ New</p>
