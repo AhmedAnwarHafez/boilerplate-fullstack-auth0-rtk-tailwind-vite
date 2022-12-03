@@ -90,7 +90,7 @@ function SelectedFruit() {
             />
           </label>
 
-          <section className="my-2 grid gap-2">
+          <section className="mt-10 flex justify-end gap-2">
             <button
               type="submit"
               data-testid="update-button"
