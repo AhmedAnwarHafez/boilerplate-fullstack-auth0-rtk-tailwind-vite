@@ -1,6 +1,6 @@
 import request from 'superagent'
 
-import { FruitRequest } from '../../common/fruit'
+import { Fruit } from '../../common/fruit'
 import { logError } from '../utils'
 
 const rootUrl = '/api/v1'
@@ -19,7 +19,7 @@ export function getFruit(id: number) {
     .catch(logError)
 }
 
-export function addFruit(fruit: FruitRequest, token: string) {
+export function addFruit(fruit: Fruit, token: string) {
   return request
     .post(`${rootUrl}/fruits`)
     .set('authorization', `Bearer ${token}`)
@@ -27,7 +27,7 @@ export function addFruit(fruit: FruitRequest, token: string) {
     .catch(logError)
 }
 
-export function updateFruit(fruit: FruitRequest, token: string) {
+export function updateFruit(fruit: Fruit, token: string) {
   return request
     .put(`${rootUrl}/fruits`)
     .set('authorization', `Bearer ${token}`)

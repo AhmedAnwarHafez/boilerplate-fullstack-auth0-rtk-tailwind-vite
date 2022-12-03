@@ -1,30 +1,29 @@
 import React, { useState } from 'react'
+import { useAuth0 } from '@auth0/auth0-react'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 import { addFruit } from '../apis/fruits'
-import { useAuth0 } from '@auth0/auth0-react'
-import { useDispatch } from 'react-redux'
 import { clearLoading, setLoading } from '../slices/loading'
-import { useNavigate } from 'react-router-dom'
 import { setError } from '../slices/error'
+import { Fruit } from '../../common/fruit'
 
 function AddFruit() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { getAccessTokenSilently, isAuthenticated } = useAuth0()
-  const [newFruit, setNewFruit] = useState(false)
-  const { name: addingName, averageGramsEach: addingGrams } = newFruit
+  const [fruit, setFruit] = useState<Fruit>({ name: '', averageGramsEach: 0 })
 
-  const handleAddChange = (e) => {
+  const handleAddChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
-    setNewFruit({
-      ...newFruit,
+    setFruit({
+      ...fruit,
       [name]: value,
     })
   }
 
-  const handleAdd = async (e) => {
+  const handleAdd = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const fruit = { ...newFruit }
     dispatch(setLoading())
     getAccessTokenSilently()
       .then((token) => addFruit(fruit, token))
@@ -55,7 +54,7 @@ function AddFruit() {
               type="text"
               name="name"
               aria-label="adding-name"
-              value={addingName || ''}
+              value={fruit.name}
               onChange={handleAddChange}
               className="mx-4 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
       focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
@@ -71,7 +70,7 @@ function AddFruit() {
               type="text"
               name="averageGramsEach"
               aria-label="adding-grams"
-              value={addingGrams || ''}
+              value={fruit.averageGramsEach}
               onChange={handleAddChange}
               className="mx-4 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
       focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
