@@ -31,23 +31,23 @@ function Nav() {
           {loading ? <Loading /> : <section className="w-[24px] h-[24px]" />}
           <h1 className="font-bold">Fruit FTW!</h1>
         </header>
-        <nav className="flex justify-end  gap-4 px-4">
-          <Link to="/" className="hover:font-semibold">
+        <nav className="flex justify-end gap-4 px-4">
+          <Link to="/" className="hover:underline">
             Home
           </Link>
           <IfAuthenticated>
-            <Link to="/profile" className="hover:font-semibold">
+            <Link to="/profile" className="hover:underline">
               Profile
             </Link>
-            <button onClick={handleLogoff} className="hover:font-semibold">
+            <button onClick={handleLogoff} className="hover:underline">
               Log off
             </button>
           </IfAuthenticated>
           <IfNotAuthenticated>
-            <button onClick={handleSignIn} className="hover:font-semibold">
+            <button onClick={handleSignIn} className="hover:underline">
               Sign In
             </button>
-            <button onClick={handleRegister} className="hover:font-semibold">
+            <button onClick={handleRegister} className="hover:underline">
               Register
             </button>
           </IfNotAuthenticated>
