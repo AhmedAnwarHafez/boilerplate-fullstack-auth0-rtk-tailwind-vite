@@ -11,7 +11,8 @@ router.get('/', checkJwt, (req, res) => {
   } else {
     getUser(auth0_id)
       .then((user) => {
-        res.json(user ? user : null)
+        console.log(user)
+        res.json(user ? user.user_metadata : null)
       })
       .catch((err) => res.status(500).send(err.message))
   }
@@ -23,7 +24,7 @@ router.post('/', checkJwt, (req, res) => {
   const userDetails = {
     color,
   }
-
+  console.log(userDetails)
   updateUser(auth0_id, userDetails).then((metadata) => {
     console.log(metadata)
   })

@@ -1,4 +1,5 @@
 export interface Fruit {
+  id: number
   name: string
   averageGramsEach: number
 }

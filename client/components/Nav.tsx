@@ -1,29 +1,26 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useSelector } from 'react-redux'
 
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import Loading from './Loading'
+import { RootState } from '../slices'
 
 function Nav() {
-  const loading = useSelector((state) => state.loading)
+  const loading = useSelector<RootState>((state) => state.loading)
   const { logout, loginWithRedirect } = useAuth0()
 
-  function handleLogoff(e) {
-    e.preventDefault()
+  function handleLogoff() {
     logout()
   }
 
-  function handleRegister(e) {
-    e.preventDefault()
+  function handleRegister() {
     loginWithRedirect({
       redirectUri: `${window.location.origin}/profile`,
     })
   }
 
-  function handleSignIn(e) {
-    e.preventDefault()
+  function handleSignIn() {
     loginWithRedirect()
   }
 
@@ -42,21 +39,17 @@ function Nav() {
             <Link to="/profile" className="hover:font-semibold">
               Profile
             </Link>
-            <Link to="/" onClick={handleLogoff} className="hover:font-semibold">
+            <button onClick={handleLogoff} className="hover:font-semibold">
               Log off
-            </Link>
+            </button>
           </IfAuthenticated>
           <IfNotAuthenticated>
-            <Link to="/" onClick={handleSignIn} className="hover:font-semibold">
+            <button onClick={handleSignIn} className="hover:font-semibold">
               Sign In
-            </Link>
-            <Link
-              to="/"
-              onClick={handleRegister}
-              className="hover:font-semibold"
-            >
+            </button>
+            <button onClick={handleRegister} className="hover:font-semibold">
               Register
-            </Link>
+            </button>
           </IfNotAuthenticated>
         </nav>
       </section>

@@ -35,11 +35,11 @@ function addFruit(fruit, db = connection) {
     .then(sort)
 }
 
-function updateFruit(newFruit, user, db = connection) {
+function updateFruit(newFruit, auth0Id, db = connection) {
   return db('fruits')
     .where('id', newFruit.id)
     .first()
-    .then((fruit) => authorizeUpdate(fruit, user))
+    .then((fruit) => authorizeUpdate(fruit, auth0Id))
     .then(() => {
       return db('fruits').where('id', newFruit.id).update(newFruit)
     })
@@ -62,7 +62,7 @@ function deleteFruit(id, auth0Id, db = connection) {
 }
 
 function authorizeUpdate(fruit, auth0Id) {
-  if (fruit.added_by_user !== auth0Id) {
+  if (fruit.auth0_id !== auth0Id) {
     throw new Error('Unauthorized')
   }
 }

@@ -6,10 +6,14 @@ const isAuthenticated = () => {
   return isAuthenticated
 }
 
-export function IfAuthenticated({ children }) {
+type Props = {
+  children: React.ReactNode
+}
+
+export function IfAuthenticated({ children }: Props) {
   return isAuthenticated() ? <>{children}</> : null
 }
 
-export function IfNotAuthenticated({ children }) {
+export function IfNotAuthenticated({ children }: Props) {
   return !isAuthenticated() ? <>{children}</> : null
 }

@@ -6,51 +6,44 @@ import { useDispatch } from 'react-redux'
 import { updateFruit, deleteFruit, getFruit } from '../apis/fruits'
 import { clearLoading, setLoading } from '../slices/loading'
 import { setError } from '../slices/error'
+import { Fruit } from '../../common/fruit'
 
 function SelectedFruit() {
   const { id } = useParams()
   const dispatch = useDispatch()
   const { getAccessTokenSilently } = useAuth0()
-  const [fruit, setFruit] = useState({
+  const [fruit, setFruit] = useState<Fruit>({
+    id: 0,
     name: '',
-    averageGramsEach: '',
-    auth0Id: '',
+    averageGramsEach: 0,
   })
 
   useEffect(() => {
     dispatch(setLoading())
-    getFruit(id)
-      .then((fruit) => {
-        console.log(fruit)
-        setFruit(() => fruit)
-      })
-      .catch((err) => {})
-      .finally(() => {
-        dispatch(clearLoading())
-      })
+    id &&
+      !isNaN(+id) &&
+      getFruit(+id)
+        .then((fruit) => {
+          console.log(fruit)
+          setFruit(() => fruit)
+        })
+        .catch((err) => dispatch(setError(err.message)))
+        .finally(() => dispatch(clearLoading()))
   }, [id])
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFruit((state) => ({ ...state, [e.target.name]: e.target.value }))
   }
 
-  const handleUpdate = (e) => {
+  const handleUpdate = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     getAccessTokenSilently()
-      // .then((token) => updateFruit(fruit, token))
+      .then((token) => {
+        console.log(fruit)
+        updateFruit(fruit, token)
+      })
       .catch((err) => dispatch(setError(err.message)))
       .finally(() => dispatch(clearLoading()))
-  }
-
-  const handleDelete = (e) => {
-    e.preventDefault()
-    getAccessTokenSilently()
-      .then((token) => deleteFruit(editing.id, token))
-      .then(setFruits)
-      .catch((err) => setError(err.message))
-      .finally(() => {
-        dispatch(clearLoading())
-      })
   }
 
   return (
@@ -63,7 +56,7 @@ function SelectedFruit() {
         >
           <label className="grid grid-cols-2 gap-2">
             Originally added by
-            <p className="mx-4">{fruit?.auth0Id}</p>
+            {/* <p className="mx-4">{fruit?.auth0Id}</p> */}
           </label>
           <label className="grid grid-cols-2 gap-2">
             Name:

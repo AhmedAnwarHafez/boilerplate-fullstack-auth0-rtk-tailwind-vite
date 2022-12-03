@@ -55,10 +55,11 @@ router.put('/', checkJwt, async (req, res) => {
   const auth0Id = req.user?.sub
   const fruitToUpdate = {
     id: fruit.id,
-    added_by_user: auth0Id,
+    auth0_id: auth0Id,
     name: fruit.name,
     average_grams_each: fruit.averageGramsEach,
   }
+
   try {
     const fruits = await db.updateFruit(fruitToUpdate, auth0Id)
     res.json({ fruits })

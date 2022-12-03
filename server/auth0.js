@@ -50,8 +50,7 @@ async function updateUser(id, userDetails) {
     { id },
     { user_metadata: { ...userDetails } }
   )
-  const user = await management.getUser({ id })
-  return user.user_metadata
+  return await getUser(id)
 }
 
 module.exports = {
