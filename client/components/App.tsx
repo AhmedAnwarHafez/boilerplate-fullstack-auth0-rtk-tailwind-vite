@@ -9,12 +9,12 @@ import Error from './Error'
 
 function App() {
   return (
-    <>
+    <section className="box-border">
       <Nav />
       <header>
         <Error />
       </header>
-      <main className="flex">
+      <main className="flex bg-slate-900 h-screen">
         <Routes>
           <Route path="/" element={<Fruits />}>
             <Route path="new" element={<AddFruit />} />
@@ -23,7 +23,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </main>
-    </>
+    </section>
   )
 }
 
