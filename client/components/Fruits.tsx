@@ -44,15 +44,6 @@ function Fruits() {
             </li>
           ))}
         </ul>
-
-        {/* {selected && (
-        <SelectedFruit
-          selected={selected}
-          clearSelected={clearSelected}
-          setError={setError}
-          setFruits={setFruits}
-        />
-      )} */}
       </section>
       <Outlet />
     </section>
