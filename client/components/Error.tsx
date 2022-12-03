@@ -1,23 +1,24 @@
-import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+
+import { RootState } from '../slices/index'
 import { clearError } from '../slices/error'
 
 function Error() {
   const dispatch = useDispatch()
-  const error = useSelector((state) => state.error)
+  const error = useSelector<RootState>((state) => state.error)
 
   return (
     <section>
       {!!error && (
-        <p className="text-sm">
-          {error}{' '}
+        <div className="text-sm">
+          <span>{error + ' '}</span>
           <span
             className="cursor-pointer font-mono font-bold rounded-lg bg-slate-400 px-1"
             onClick={() => dispatch(clearError())}
           >
             X
           </span>
-        </p>
+        </div>
       )}
     </section>
   )
