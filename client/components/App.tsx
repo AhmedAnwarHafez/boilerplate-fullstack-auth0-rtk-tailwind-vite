@@ -14,7 +14,7 @@ function App() {
       <header>
         <Error />
       </header>
-      <main className="flex  ">
+      <main className="flex">
         <Routes>
           <Route path="/" element={<Fruits />}>
             <Route path="new" element={<AddFruit />} />
