@@ -12,7 +12,11 @@ function AddFruit() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { getAccessTokenSilently, isAuthenticated } = useAuth0()
-  const [fruit, setFruit] = useState<Fruit>({ name: '', averageGramsEach: 0 })
+  const [fruit, setFruit] = useState<Fruit>({
+    id: 0,
+    name: '',
+    averageGramsEach: 0,
+  })
 
   const handleAddChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
