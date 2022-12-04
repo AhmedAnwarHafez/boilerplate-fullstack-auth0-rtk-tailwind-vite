@@ -28,7 +28,7 @@ function Fruits() {
     <section className="flex gap-2 w-screen">
       <section className="flex flex-col ml-5 mt-5 border-r-2 border-r-slate-200 p-5 pr-10 text-5xl rounded-lg bg-white">
         <Link to="/new" className="justify-self-end">
-          <div className="rounded-lg p-1 bg-blue-800 text-white hover:bg-blue-500">
+          <div className="rounded-lg p-4 bg-blue-800 text-white hover:bg-blue-500">
             <p>+ New</p>
           </div>
         </Link>
@@ -45,7 +45,7 @@ function Fruits() {
           ))}
         </ul>
       </section>
-      <main className="bg-white rounded-lg p-10 mt-5 grow mx-5">
+      <main className="bg-white rounded-lg p-10 mt-5 grow mx-5 ">
         <Outlet />
       </main>
     </section>

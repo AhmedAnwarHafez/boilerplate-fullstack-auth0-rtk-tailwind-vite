@@ -48,17 +48,17 @@ function SelectedFruit() {
 
   return (
     <>
-      <main className="mt-5 text-5xl">
+      <main className="text-5xl">
         <form
           onSubmit={handleUpdate}
-          className="flex flex-col justify-start gap-1"
+          className="flex flex-col justify-start gap-5"
         >
-          <label className="grid grid-cols-2 gap-2">
+          {/* <label className="grid grid-cols-2 gap-2">
             Originally added by
-            {/* <p className="mx-4">{fruit?.auth0Id}</p> */}
-          </label>
-          <label className="grid grid-cols-2 gap-2">
-            Name:
+            <p className="mx-4">{fruit?.auth0Id}</p>
+          </label> */}
+          <label className="flex flex-col gap-4">
+            <p className="text-4xl">Name</p>
             <input
               type="text"
               name="name"
@@ -66,15 +66,15 @@ function SelectedFruit() {
               data-testid="selected-name"
               value={fruit.name}
               onChange={handleChange}
-              className="mx-4 bg-white border border-slate-300 rounded-md text-5xl shadow-sm placeholder-slate-400
+              className="bg-white border border-slate-299 rounded-md text-5xl shadow-sm placeholder-slate-400
       focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
       disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
       invalid:border-pink-500 invalid:text-pink-600
       focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
             />
           </label>
-          <label className="grid grid-cols-2 gap-2">
-            Average Grams Each:
+          <label className="flex flex-col gap-4">
+            <p className="text-4xl">Average Grams Each</p>
             <input
               type="text"
               name="averageGramsEach"
@@ -82,7 +82,7 @@ function SelectedFruit() {
               data-testid="selected-grams"
               value={fruit.averageGramsEach}
               onChange={handleChange}
-              className="mx-4 bg-white border border-slate-300 rounded-md text-5xl shadow-sm placeholder-slate-400
+              className="bg-white border border-slate-300 rounded-md text-5xl shadow-sm placeholder-slate-400
       focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
       disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
       invalid:border-pink-500 invalid:text-pink-600
@@ -94,7 +94,7 @@ function SelectedFruit() {
             <button
               type="submit"
               data-testid="update-button"
-              className="rounded-2xl bg-blue-800 hover:bg-blue-600 text-white p-2 px-4 w-fit"
+              className="rounded-2xl bg-blue-800 hover:bg-blue-600 text-white p-4 px-10 w-fit"
             >
               Update
             </button>
@@ -102,13 +102,13 @@ function SelectedFruit() {
               type="button"
               data-testid="delete-button"
               // onClick={handleDelete}
-              className="rounded-2xl bg-blue-800 hover:bg-blue-600 text-white p-2 px-4 w-fit"
+              className="rounded-2xl bg-blue-800 hover:bg-blue-600 text-white p-4 px-10 w-fit"
             >
               Delete
             </button>
             <Link
               to="/"
-              className="rounded-2xl bg-blue-800 hover:bg-blue-600 text-white p-2 px-4 w-fit"
+              className="rounded-2xl bg-blue-800 hover:bg-blue-600 text-white p-4 px-10 w-fit"
             >
               Cancel
             </Link>

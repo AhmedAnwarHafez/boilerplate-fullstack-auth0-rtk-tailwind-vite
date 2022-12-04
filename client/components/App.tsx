@@ -9,7 +9,7 @@ import Error from './Error'
 
 function App() {
   return (
-    <section className="box-border">
+    <section>
       <Nav />
       <header>
         <Error />
