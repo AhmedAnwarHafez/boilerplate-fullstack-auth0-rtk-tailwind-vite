@@ -8,7 +8,11 @@ import { clearLoading, setLoading } from '../slices/loading'
 import { setError } from '../slices/error'
 import { Fruit } from '../../common/fruit'
 
-function AddFruit() {
+export type Props = {
+  setFruits: React.Dispatch<React.SetStateAction<Fruit[]>>
+}
+
+function AddFruit({ setFruits }: Props) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { getAccessTokenSilently, isAuthenticated } = useAuth0()
