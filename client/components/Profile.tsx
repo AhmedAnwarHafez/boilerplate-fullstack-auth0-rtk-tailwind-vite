@@ -48,7 +48,7 @@ function Profile() {
 
   return (
     <>
-      <form className="flex flex-col justify-start gap-2 text-5xl p-5">
+      <form className="flex flex-col justify-start gap-2 p-5 text-5xl">
         <label htmlFor="authId" className="grid grid-cols-2 gap-2">
           Auth0Id
           <span className="ml-4 font-bold">{user?.sub}</span>
@@ -64,17 +64,17 @@ function Profile() {
             name="color"
             value={form.color}
             onChange={handleChange}
-            className="mx-4 bg-white border border-slate-300 rounded-md text-5xl shadow-sm placeholder-slate-400
-      focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
-      disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-      invalid:border-pink-500 invalid:text-pink-600
-      focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+            className="mx-4 rounded-md border border-slate-300 bg-white text-5xl placeholder-slate-400 shadow-sm
+      invalid:border-pink-500 invalid:text-pink-600 focus:border-sky-500 focus:outline-none
+      focus:ring-1 focus:ring-sky-500 focus:invalid:border-pink-500 focus:invalid:ring-pink-500
+      disabled:border-slate-200 disabled:bg-slate-50
+      disabled:text-slate-500 disabled:shadow-none"
           />
         </label>
         <Button
           onClick={handleSubmit}
           isLoading={isLoading}
-          className="flex justify-evenly rounded-2xl bg-blue-800 hover:bg-blue-600 text-white p-2 px-4 my-5 w-fit"
+          className="my-5 flex w-fit justify-evenly rounded-2xl bg-blue-800 p-2 px-4 text-white hover:bg-blue-600"
         >
           Update
         </Button>

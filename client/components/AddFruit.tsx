@@ -65,11 +65,11 @@ function AddFruit({ setFruits }: Props) {
               aria-label="adding-name"
               value={fruit.name}
               onChange={handleAddChange}
-              className="bg-white border border-slate-300 rounded-md text-5xl shadow-sm placeholder-slate-400
-      focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
-      disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-      invalid:border-pink-500 invalid:text-pink-600
-      focus:invalid:border-pink-500 focus:invalid:ring-pink-500
+              className="rounded-md border border-slate-300 bg-white text-5xl placeholder-slate-400 shadow-sm
+      invalid:border-pink-500 invalid:text-pink-600 focus:border-sky-500 focus:outline-none
+      focus:ring-1 focus:ring-sky-500 focus:invalid:border-pink-500 focus:invalid:ring-pink-500
+      disabled:border-slate-200 disabled:bg-slate-50
+      disabled:text-slate-500 disabled:shadow-none
       "
             />
           </label>
@@ -81,20 +81,20 @@ function AddFruit({ setFruits }: Props) {
               aria-label="adding-grams"
               value={fruit.averageGramsEach}
               onChange={handleAddChange}
-              className="bg-white border border-slate-300 rounded-md text-5xl shadow-sm placeholder-slate-400
-      focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
-      disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-      invalid:border-pink-500 invalid:text-pink-600
-      focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
+              className="rounded-md border border-slate-300 bg-white text-5xl placeholder-slate-400 shadow-sm
+      invalid:border-pink-500 invalid:text-pink-600 focus:border-sky-500 focus:outline-none
+      focus:ring-1 focus:ring-sky-500 focus:invalid:border-pink-500 focus:invalid:ring-pink-500
+      disabled:border-slate-200 disabled:bg-slate-50
+      disabled:text-slate-500 disabled:shadow-none"
             />
           </label>
 
           <section className="my-10 flex justify-end gap-4">
             <button
               type="submit"
-              className={`rounded-2xl bg-blue-800 hover:bg-blue-600 text-white p-4 px-10 w-fit ${
+              className={`w-fit rounded-2xl bg-blue-800 p-4 px-10 text-white hover:bg-blue-600 ${
                 !isAuthenticated &&
-                'bg-slate-300 text-slate-800 cursor-not-allowed hover:bg-slate-400'
+                'cursor-not-allowed bg-slate-300 text-slate-800 hover:bg-slate-400'
               }`}
               disabled={!isAuthenticated}
             >
@@ -103,7 +103,7 @@ function AddFruit({ setFruits }: Props) {
             <button
               type="button"
               onClick={handleCancel}
-              className="rounded-2xl bg-blue-800 hover:bg-blue-600 text-white p-4 px-10 w-fit"
+              className="w-fit rounded-2xl bg-blue-800 p-4 px-10 text-white hover:bg-blue-600"
             >
               Cancel
             </button>

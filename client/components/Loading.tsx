@@ -3,7 +3,7 @@ function Loading() {
     <figure>
       <svg
         fill="none"
-        className="w-6 h-6 animate-spin"
+        className="h-6 w-6 animate-spin"
         viewBox="0 0 32 32"
         xmlns="http://www.w3.org/2000/svg"
       >

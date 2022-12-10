@@ -13,7 +13,7 @@ function Error() {
         <div className="text-sm">
           <span>{error + ' '}</span>
           <span
-            className="cursor-pointer font-mono font-bold rounded-lg bg-slate-400 px-1"
+            className="cursor-pointer rounded-lg bg-slate-400 px-1 font-mono font-bold"
             onClick={() => dispatch(clearError())}
           >
             X
