@@ -12,6 +12,8 @@ function Fruits() {
   const [fruits, setFruits] = useState([])
 
   useEffect(() => {
+    console.log('Fruits useEffect')
+
     dispatch(setLoading())
     // eslint-disable-next-line promise/catch-or-return
     getFruits()
