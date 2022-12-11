@@ -1,14 +1,17 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Auth0Provider } from '@auth0/auth0-react'
 import App from './components/App'
 import { Provider } from 'react-redux'
 
 import store from './slices'
+import { StrictMode } from 'react'
 
-document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(
+const container = document.getElementById('app')
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const root = createRoot(container!)
+root.render(
+  <StrictMode>
     <Auth0Provider
       domain="dev-l15ujwk4.au.auth0.com"
       clientId="W1zHcnGihSz4yraMmDFQ8NNrOQsOjFEW"
@@ -20,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
           <App />
         </Router>
       </Provider>
-    </Auth0Provider>,
-    document.getElementById('app')
-  )
-})
+    </Auth0Provider>
+  </StrictMode>
+)

@@ -24,7 +24,6 @@ function SelectedFruit() {
       !isNaN(+id) &&
       getFruit(+id)
         .then((fruit) => {
-          console.log(fruit)
           setFruit(() => fruit)
         })
         .catch((err) => dispatch(setError(err.message)))
