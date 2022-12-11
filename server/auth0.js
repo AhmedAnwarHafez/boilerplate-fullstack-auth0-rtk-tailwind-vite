@@ -1,4 +1,4 @@
-const jwt = require('express-jwt')
+const { expressjwt } = require('express-jwt')
 const jwks = require('jwks-rsa')
 const { ManagementClient } = require('auth0')
 const dotenv = require('dotenv')
@@ -8,7 +8,7 @@ dotenv.config()
 // TODO: set the domain and audience (API Identifier)
 const domain = 'https://dev-l15ujwk4.au.auth0.com'
 const audience = 'https://fruits/api'
-const checkJwt = jwt({
+const checkJwt = expressjwt({
   secret: jwks.expressJwtSecret({
     cache: true,
     rateLimit: true,
