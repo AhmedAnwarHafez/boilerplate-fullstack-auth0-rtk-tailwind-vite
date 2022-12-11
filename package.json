@@ -30,6 +30,12 @@
     "preset": "ts-jest/presets/js-with-ts-esm",
     "testEnvironment": "jsdom"
   },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
   "dependencies": {
     "@auth0/auth0-react": "^1.8.0",
     "auth0": "^2.44.0",
@@ -60,6 +66,7 @@
     "@typescript-eslint/eslint-plugin": "^5.45.0",
     "@typescript-eslint/parser": "^5.46.0",
     "@vitejs/plugin-react": "^2.1.0",
+    "babel-jest": "^29.3.1",
     "dotenv": "^16.0.3",
     "eslint": "^8.9.0",
     "eslint-plugin-import": "^2.25.4",
